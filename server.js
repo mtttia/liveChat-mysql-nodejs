@@ -1,6 +1,7 @@
 const http = require('http');
 const url = require('url');
 const db = require('./connect-db');
+const data = require('./databaseData');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 //connetto il database
-db.initialize('127.0.0.1', 'root', '', 'chatnode');
+db.initialize(data.host, data.user, data.password, data.database);
 
 app.post('/', (req,res)=>{
     res.writeHead(200, {'Access-Control-Allow-Origin' : '*', 'content-type' : 'application/json'});
